@@ -119,4 +119,4 @@ server:
 deploy:
   type: git
   repo: https://github.com/Ewithome/Ewithome.github.io.git
-  branch: gh-pages
+  branch: main
