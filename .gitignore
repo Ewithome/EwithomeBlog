@@ -10,3 +10,8 @@ public/
 _multiconfig.yml
 package-lock.json
 yarn.lock
+
+# Deploy keys - never commit
+deploy_key
+deploy_key.pub
+*.pem
