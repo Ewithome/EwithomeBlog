@@ -152,11 +152,20 @@ ssh-keygen -t ed25519 -C "hexo-deploy" -f deploy_key -N '""'
 
 ### 本机无法连接 GitHub 时
 
-开 VPN / 代理后重试 `publish.bat`，或配置 Git 代理：
+报错 `Failed to connect to github.com port 443` 表示本机访问不了 GitHub，**不是脚本问题**。
+
+1. 打开 **VPN / Clash / v2ray** 等代理  
+2. 复制 `proxy.local.bat.example` 为 **`proxy.local.bat`**，把端口改成你的代理端口（常见 `7890`、`10809`）  
+3. 再运行 **`publish.bat`**
+
+或手动设置（端口按实际修改）：
 
 ```bash
 git config --global http.https://github.com.proxy http://127.0.0.1:7890
+git config --global https.https://github.com.proxy http://127.0.0.1:7890
 ```
+
+**暂时无法上传时**：双击 **`preview.bat`** 在本地 http://localhost:4001 预览；`publish.bat` 失败时也会自动尝试打开本地预览。
 
 ### 上传源码到 GitHub（本仓库）
 

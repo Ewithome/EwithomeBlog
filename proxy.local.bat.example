@@ -1,0 +1,12 @@
+@echo off
+REM Copy to proxy.local.bat and edit port for your VPN/clash/v2ray
+REM publish.bat will load it automatically
+
+set "GIT_PROXY=http://127.0.0.1:7890"
+
+git config --global http.https://github.com.proxy %GIT_PROXY%
+git config --global https.https://github.com.proxy %GIT_PROXY%
+set HTTP_PROXY=%GIT_PROXY%
+set HTTPS_PROXY=%GIT_PROXY%
+
+echo [proxy] Using %GIT_PROXY% for GitHub
