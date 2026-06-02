@@ -45,7 +45,7 @@ jobs:
         with:
           folder: public
           repository-name: Ewithome/Ewithome.github.io
-          branch: gh-pages
+          branch: main
           single-commit: true
           clean: true
           ssh-key: ${{ secrets.DEPLOY_KEY }}

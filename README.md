@@ -104,81 +104,59 @@ cover: /images/cover.jpg    # 可选：首页/轮播封面
 
 ## 发布到 GitHub Pages
 
-本项目采用 **双仓库** 方式（源码与站点分离）：
+采用 **双仓库**，线上网站只用 **`main` 分支**（不再使用 `gh-pages`）：
 
-| 仓库 | 作用 |
-|------|------|
-| 源码仓库（本仓库） | 存放 Hexo 源码，推送到 GitHub |
-| `Ewithome/Ewithome.github.io` | 仅存放构建后的静态页，分支 `gh-pages` |
+| 仓库 | 分支 | 内容 |
+|------|------|------|
+| **EwithomeBlog** | `main` | Hexo 源码（文章、配置） |
+| **Ewithome.github.io** | `main` | 构建后的网站（`index.html` 等） |
 
-### 第一次部署前
+### GitHub Pages 设置（只需做一次）
 
-1. 在 GitHub 创建 **`Ewithome.github.io`** 仓库（若尚未创建）。
-2. 确认 `_config.yml` 中 `url` 为 `https://ewithome.github.io`。
-3. **配置 GitHub Actions 自动发布**（推荐，避免本机连不上 `github.com:443`）：
+在 **`Ewithome.github.io`** → **Settings** → **Pages**：
 
-在 **`EwithomeBlog`** 仓库 → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**：
+- **Source**：Deploy from a branch  
+- **Branch**：**`main`**，目录 **`/ (root)`**  
+- 若之前选过 `gh-pages`，请改成 **`main`** 并保存  
 
-| Name | 值 |
-|------|-----|
-| `DEPLOY_KEY` | 部署用 SSH 私钥全文（见下） |
+在 **`EwithomeBlog`** → **Settings** → **Pages**：建议 **关闭** 或不要启用（避免截图里那种 `pages build and deployment` 把 README 当网站发布）。
 
-生成密钥（PowerShell，在项目外任意目录执行）：
+### 日常发布
+
+**双击 `publish.bat`**，会自动：
+
+1. 构建站点  
+2. `hexo deploy` 推送到 **Ewithome.github.io** 的 **`main`**  
+3. 备份源码到 **EwithomeBlog**  
+4. 用浏览器打开 <https://ewithome.github.io>  
+
+本地预览（改文章时）：`pnpm run server` → http://localhost:4001
+
+### 本机 deploy 失败时的备用方案
+
+若 `hexo deploy` 因网络超时失败，`publish.bat` 会改推源码到 **EwithomeBlog**，由 [GitHub Actions](https://github.com/Ewithome/EwithomeBlog/actions) 部署到 **Ewithome.github.io** 的 **`main`**。
+
+需配置 **`DEPLOY_KEY`** Secret（`EwithomeBlog`）+ **Deploy key**（`Ewithome.github.io`，勾选 write）。详见下方。
+
+<details>
+<summary>配置 DEPLOY_KEY（备用 Actions 用）</summary>
 
 ```powershell
 ssh-keygen -t ed25519 -C "hexo-deploy" -f deploy_key -N '""'
 ```
 
-- 把 **`deploy_key.pub`** 内容添加到 **`Ewithome.github.io`** → **Settings** → **Deploy keys** → **Add deploy key**，勾选 **Allow write access**。
-- 把 **`deploy_key`**（无私钥后缀的文件）全文复制到 Secret **`DEPLOY_KEY`**。
+- `deploy_key.pub` → **Ewithome.github.io** → Deploy keys（Allow write access）  
+- `deploy_key` 全文 → **EwithomeBlog** → Secrets → `DEPLOY_KEY`  
 
-4. 将 `.github/workflows/deploy.yml` 随源码推送到 `EwithomeBlog` 的 `main` 分支。
-
-### 两个仓库别搞混
-
-| 仓库 | 你看到的提交 | 是否等于网站更新 |
-|------|----------------|------------------|
-| **EwithomeBlog** `main` | `source/_posts/*.md` 等源码 | 否，只是源码 |
-| **Ewithome.github.io** `gh-pages` | `index.html`、文章 HTML | **是，这才是线上网站** |
-| **Ewithome.github.io** `main` | 往往只有 README | 一般不是网站内容 |
-
-`publish.bat` 只推源码到 **EwithomeBlog**。网站要靠 [Actions](https://github.com/Ewithome/EwithomeBlog/actions) 自动推到 **Ewithome.github.io** 的 `gh-pages`。若 Actions 是红色失败，网站不会变。
-
-### 日常发布流程（推荐）
-
-**双击 `publish.bat`**：本地构建 → `git push` 到 `EwithomeBlog` → **GitHub Actions 在云端** 构建并推送到 `gh-pages`。
-
-打开 [Actions 页面](https://github.com/Ewithome/EwithomeBlog/actions)，等任务变绿后访问 <https://ewithome.github.io>（约 2～5 分钟）。
-
-**若 Actions 失败（红叉）**，常见原因：
-
-1. 未配置 **`DEPLOY_KEY`** Secret，或私钥内容不完整（须含 `BEGIN` / `END` 行）。
-2. **`deploy_key.pub`** 未加到 `Ewithome.github.io` → Settings → Deploy keys，或未勾选 **Allow write access**。
-3. 修复后：Actions 页 → 选中失败记录 → **Re-run all jobs**。
-
-在 `Ewithome.github.io` 仓库切到 **`gh-pages`** 分支，应能看到 `2026/06/02/hello-world/index.html` 等文件；若该分支很久没更新，说明部署未成功。
-
-本机网络能直连 GitHub 时，也可用 **`publish-local.bat`**（走 `hexo deploy`，不经过 Actions）。
+</details>
 
 ### 本机无法连接 GitHub 时
 
-报错 `Failed to connect to github.com port 443` / `Timed out` 表示本机访问 GitHub 受限，**不要用 `publish-local.bat`**，请：
-
-1. 使用 **`publish.bat`** + 上述 **GitHub Actions**（只需能 push 到 `EwithomeBlog`，通常比直连 Pages 仓库更稳定）；或
-2. 开 VPN / 代理后再 push。Git 代理示例（端口按你的工具修改）：
+开 VPN / 代理后重试 `publish.bat`，或配置 Git 代理：
 
 ```bash
 git config --global http.https://github.com.proxy http://127.0.0.1:7890
 ```
-
-### GitHub Pages 设置
-
-在 **`Ewithome.github.io`** 仓库中：
-
-1. **Settings** → **Pages**
-2. **Source** 选择 **Deploy from a branch**
-3. **Branch** 选 **`gh-pages`**，目录 **`/ (root)`**
-4. 保存后等待几分钟，访问 <https://ewithome.github.io>
 
 ### 上传源码到 GitHub（本仓库）
 
