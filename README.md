@@ -115,22 +115,43 @@ cover: /images/cover.jpg    # 可选：首页/轮播封面
 
 1. 在 GitHub 创建 **`Ewithome.github.io`** 仓库（若尚未创建）。
 2. 确认 `_config.yml` 中 `url` 为 `https://ewithome.github.io`。
-3. 确认 `deploy.repo` 指向正确的 Pages 仓库（见 `_config.yml` 的 `deploy` 段）。
-4. 本机已配置 Git，且对 GitHub 有推送权限（HTTPS 凭据或 SSH 密钥）。
+3. **配置 GitHub Actions 自动发布**（推荐，避免本机连不上 `github.com:443`）：
 
-### 日常发布流程
+在 **`EwithomeBlog`** 仓库 → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**：
 
-```bash
-# 1. 本地构建并推送到 Pages 仓库
-pnpm run deploy
+| Name | 值 |
+|------|-----|
+| `DEPLOY_KEY` | 部署用 SSH 私钥全文（见下） |
 
-# 2. 将源码提交到源码仓库（示例）
-git add .
-git commit -m "更新文章"
-git push origin main
+生成密钥（PowerShell，在项目外任意目录执行）：
+
+```powershell
+ssh-keygen -t ed25519 -C "hexo-deploy" -f deploy_key -N '""'
 ```
 
-`pnpm run deploy` 会依次执行 `hexo clean` → `hexo generate` → `hexo deploy`，把 `public/` 内容推到 `Ewithome.github.io` 的 **`gh-pages`** 分支。
+- 把 **`deploy_key.pub`** 内容添加到 **`Ewithome.github.io`** → **Settings** → **Deploy keys** → **Add deploy key**，勾选 **Allow write access**。
+- 把 **`deploy_key`**（无私钥后缀的文件）全文复制到 Secret **`DEPLOY_KEY`**。
+
+4. 将 `.github/workflows/deploy.yml` 随源码推送到 `EwithomeBlog` 的 `main` 分支。
+
+### 日常发布流程（推荐）
+
+**双击 `publish.bat`**：本地构建 → `git push` 到 `EwithomeBlog` → **GitHub Actions 在云端** 构建并推送到 `gh-pages`。
+
+打开 [Actions 页面](https://github.com/Ewithome/EwithomeBlog/actions)，等任务变绿后访问 <https://ewithome.github.io>（约 2～5 分钟）。
+
+本机网络能直连 GitHub 时，也可用 **`publish-local.bat`**（走 `hexo deploy`，不经过 Actions）。
+
+### 本机无法连接 GitHub 时
+
+报错 `Failed to connect to github.com port 443` / `Timed out` 表示本机访问 GitHub 受限，**不要用 `publish-local.bat`**，请：
+
+1. 使用 **`publish.bat`** + 上述 **GitHub Actions**（只需能 push 到 `EwithomeBlog`，通常比直连 Pages 仓库更稳定）；或
+2. 开 VPN / 代理后再 push。Git 代理示例（端口按你的工具修改）：
+
+```bash
+git config --global http.https://github.com.proxy http://127.0.0.1:7890
+```
 
 ### GitHub Pages 设置
 
