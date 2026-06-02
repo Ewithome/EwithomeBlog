@@ -1,0 +1,19 @@
+- class_name: 主题与工具
+  class_desc: FlatPaper 主题相关站点。
+  link_list:
+    - name: FlatPaper Demo
+      link: https://flatpaper.nep.me/
+      avatar: https://flatpaper.nep.me/favicon.ico
+      descr: FlatPaper 主题官方演示站。
+    - name: hexo-theme-flatpaper
+      link: https://github.com/Homulilly/hexo-theme-flatpaper
+      avatar: https://github.githubassets.com/favicons/favicon.svg
+      descr: FlatPaper 主题仓库。
+
+- class_name: 博客
+  class_desc: 个人与社区博客。
+  link_list:
+    - name: Hexo
+      link: https://hexo.io/
+      avatar: https://hexo.io/favicon.ico
+      descr: 快速、简洁且强大的博客框架。

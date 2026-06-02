@@ -1,0 +1,100 @@
+menu:
+  首页:
+    link: /
+    icon: home
+  友链:
+    link: /links/
+    icon: link
+  关于:
+    link: /about/
+    icon: user
+  文章:
+    icon: folder
+    item:
+      归档:
+        link: /archives/
+        icon: archive
+      分类:
+        link: /categories/
+        icon: folder
+      标签:
+        link: /tags/
+        icon: tag
+
+nav:
+  enable: true
+  menu:
+    - title: Live DEMO
+      item:
+        - name: FlatPaper Demo
+          link: https://flatpaper.nep.me/
+          icon: leaf
+        - name: Ewithome
+          link: https://github.com/Ewithome
+          icon: github
+    - title: Other Sites
+      item:
+        - name: Theme Repo
+          link: https://github.com/Homulilly/hexo-theme-flatpaper
+          icon: github
+
+profile:
+  role: 日常记录
+  bio: 记录技术、生活与见闻的个人博客。
+  avatar_shape: square
+  site_info:
+    posts: /archives/
+    categories: /categories/
+    tags: /tags/
+  social:
+    GitHub: https://github.com/Ewithome
+  rss:
+    enable: true
+    path: /atom.xml
+
+welcome:
+  label: 今日份记录
+  title: 把日子，慢慢写下来
+  text: 生活不是每天都精彩，但总有值得收藏的片段。
+  cta_text: 开始阅读
+  cta_link: archives/
+
+excerpt_length: 96
+random_posts: 5
+random_posts_pool: 100
+related_posts: 4
+
+search:
+  limit: 0
+
+tags:
+  style: tape
+
+featured:
+  - hello-world
+  - getting-started
+  - web-development
+  - productivity-tips
+featured_autoplay: 5000
+featured_image_zigzag: true
+
+color: green
+
+tape:
+  enable: true
+
+footer:
+  left: '© {year} By {name}'
+  right: 'Powered by Theme {theme}'
+
+note:
+  style: flat
+  icons: true
+
+code:
+  theme: dark
+
+fancybox:
+  enable: true
+
+comments:
