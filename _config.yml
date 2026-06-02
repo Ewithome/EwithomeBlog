@@ -4,11 +4,11 @@
 
 # Site
 title: Ewithome Blog
-subtitle: 'Welcome to my blog'
-description: 'A place to share my thoughts and ideas'
+subtitle: '把日子，慢慢写下来'
+description: '记录技术、生活与见闻的个人博客'
 keywords:
 author: Ewithome
-language: en
+language: zh-CN
 timezone: 'UTC'
 
 # URL
@@ -93,10 +93,26 @@ include:
 exclude:
 ignore:
 
+# Feed
+## Docs: https://github.com/hexojs/hexo-generator-feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: true
+  order_by: -date
+  autodiscovery: true
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: flatpaper
+
+# Server
+## Docs: https://hexo.io/docs/server.html
+server:
+  port: 4001
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
