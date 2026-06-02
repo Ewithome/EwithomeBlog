@@ -36,10 +36,17 @@ if errorlevel 1 goto :push_failed
 
 echo.
 echo ========================================
-echo   Source pushed. CI deploys gh-pages.
-echo   Site: https://ewithome.github.io
-echo   Actions: https://github.com/Ewithome/EwithomeBlog/actions
-echo   Wait 2-5 minutes after green checkmark.
+echo   Source pushed to EwithomeBlog.
+echo.
+echo   Site updates ONLY if Actions succeeds:
+echo   https://github.com/Ewithome/EwithomeBlog/actions
+echo.
+echo   Green check = site will update in 2-5 min:
+echo   https://ewithome.github.io
+echo.
+echo   Red X = fix DEPLOY_KEY secret, then Re-run workflow.
+echo   Ewithome.github.io main branch is NOT the live site.
+echo   Live site = gh-pages branch.
 echo ========================================
 pause
 exit /b 0

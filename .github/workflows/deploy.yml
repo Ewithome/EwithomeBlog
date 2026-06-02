@@ -13,6 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check DEPLOY_KEY secret
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          if [ -z "$DEPLOY_KEY" ]; then
+            echo "::error::DEPLOY_KEY secret is missing. Add it in EwithomeBlog Settings - Secrets - Actions."
+            exit 1
+          fi
+          echo "DEPLOY_KEY is set."
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -24,19 +34,19 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build site
+      - name: Install and build
         run: |
+          pnpm install --frozen-lockfile
           pnpm run clean
           pnpm run build
 
       - name: Deploy to Ewithome.github.io
-        uses: peaceiris/actions-hexo-deploy@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          deploy_key: ${{ secrets.DEPLOY_KEY }}
-          external_repository: Ewithome/Ewithome.github.io
-          publish_branch: gh-pages
-          publish_dir: ./public
-          commit_message: "site: deploy from GitHub Actions"
+          folder: public
+          repository-name: Ewithome/Ewithome.github.io
+          branch: gh-pages
+          single-commit: true
+          clean: true
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+          commit-message: site deploy from GitHub Actions

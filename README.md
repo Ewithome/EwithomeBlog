@@ -134,11 +134,29 @@ ssh-keygen -t ed25519 -C "hexo-deploy" -f deploy_key -N '""'
 
 4. 将 `.github/workflows/deploy.yml` 随源码推送到 `EwithomeBlog` 的 `main` 分支。
 
+### 两个仓库别搞混
+
+| 仓库 | 你看到的提交 | 是否等于网站更新 |
+|------|----------------|------------------|
+| **EwithomeBlog** `main` | `source/_posts/*.md` 等源码 | 否，只是源码 |
+| **Ewithome.github.io** `gh-pages` | `index.html`、文章 HTML | **是，这才是线上网站** |
+| **Ewithome.github.io** `main` | 往往只有 README | 一般不是网站内容 |
+
+`publish.bat` 只推源码到 **EwithomeBlog**。网站要靠 [Actions](https://github.com/Ewithome/EwithomeBlog/actions) 自动推到 **Ewithome.github.io** 的 `gh-pages`。若 Actions 是红色失败，网站不会变。
+
 ### 日常发布流程（推荐）
 
 **双击 `publish.bat`**：本地构建 → `git push` 到 `EwithomeBlog` → **GitHub Actions 在云端** 构建并推送到 `gh-pages`。
 
 打开 [Actions 页面](https://github.com/Ewithome/EwithomeBlog/actions)，等任务变绿后访问 <https://ewithome.github.io>（约 2～5 分钟）。
+
+**若 Actions 失败（红叉）**，常见原因：
+
+1. 未配置 **`DEPLOY_KEY`** Secret，或私钥内容不完整（须含 `BEGIN` / `END` 行）。
+2. **`deploy_key.pub`** 未加到 `Ewithome.github.io` → Settings → Deploy keys，或未勾选 **Allow write access**。
+3. 修复后：Actions 页 → 选中失败记录 → **Re-run all jobs**。
+
+在 `Ewithome.github.io` 仓库切到 **`gh-pages`** 分支，应能看到 `2026/06/02/hello-world/index.html` 等文件；若该分支很久没更新，说明部署未成功。
 
 本机网络能直连 GitHub 时，也可用 **`publish-local.bat`**（走 `hexo deploy`，不经过 Actions）。
 
