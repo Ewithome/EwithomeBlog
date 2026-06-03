@@ -4,7 +4,7 @@ date: 2026-06-01 09:00:00
 categories: 博客
 tags:
   - 博客
-  - Wise Map
+  - WiseMap
 ---
 
 本站是我的个人博客，主要发布技术笔记、项目记录与随笔。
