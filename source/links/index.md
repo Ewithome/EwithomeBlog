@@ -4,4 +4,4 @@ date: 2026-06-02
 type: links
 ---
 
-欢迎交换友链。如需添加链接，可通过 GitHub 联系我。
+本站友链以本人项目为主。如需交换链接，可通过 [GitHub](https://github.com/Ewithome) 联系我。

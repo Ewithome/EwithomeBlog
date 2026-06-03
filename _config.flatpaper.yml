@@ -24,19 +24,14 @@ menu:
 nav:
   enable: true
   menu:
-    - title: Live DEMO
+    - title: 我的项目
       item:
-        - name: FlatPaper Demo
-          link: https://flatpaper.nep.me/
-          icon: leaf
-        - name: Ewithome
+        - name: GitHub
           link: https://github.com/Ewithome
           icon: github
-    - title: Other Sites
-      item:
-        - name: Theme Repo
-          link: https://github.com/Homulilly/hexo-theme-flatpaper
-          icon: github
+        - name: Wise Map
+          link: https://www.npmjs.com/package/wise-map
+          icon: link
 
 profile:
   role: 日常记录
@@ -85,7 +80,7 @@ tape:
 
 footer:
   left: '© {year} By {name}'
-  right: 'Powered by Theme {theme}'
+  right: '<a href="https://github.com/Ewithome" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.npmjs.com/package/wise-map" target="_blank" rel="noopener">Wise Map</a>'
 
 note:
   style: flat

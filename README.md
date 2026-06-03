@@ -1,6 +1,6 @@
 # Ewithome Blog
 
-基于 [Hexo](https://hexo.io/) 与 [FlatPaper](https://github.com/Homulilly/hexo-theme-flatpaper) 的个人博客。线上地址：<https://ewithome.github.io>
+Ewithome 个人博客。线上地址：<https://ewithome.github.io>
 
 ## 环境要求
 
@@ -99,8 +99,6 @@ cover: /images/cover.jpg    # 可选：首页/轮播封面
 - `color`：默认主题色（`green` / `pink` / `blue` 等）
 
 > 不要直接改 `themes/flatpaper/_config.yml`，升级主题时会被覆盖；请只改根目录的 `_config.flatpaper.yml`。
-
-主题文档：[FlatPaper 配置说明](https://github.com/Homulilly/hexo-theme-flatpaper/blob/main/docs/zh/configuration.md)
 
 ## 发布到 GitHub Pages
 
@@ -218,7 +216,6 @@ git pull   # 若主题目录仍通过 git 管理；或直接重新 clone 覆盖�
 
 ## 参考链接
 
-- [Hexo 文档](https://hexo.io/docs/)
-- [FlatPaper 主题](https://github.com/Homulilly/hexo-theme-flatpaper)
-- [FlatPaper Demo](https://flatpaper.nep.me/)
+- [GitHub](https://github.com/Ewithome)
+- [wise-map](https://www.npmjs.com/package/wise-map)
 - [GitHub Pages 文档](https://docs.github.com/en/pages)
