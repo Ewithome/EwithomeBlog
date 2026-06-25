@@ -1,0 +1,55 @@
+mapproview 产品级                                       完成
+webgis 不在支持多工程项目  直接独立出来       完成
+qiankun 的使用  wujie                                   研究过了 不合适
+时间轴功能
+Alova  lerna
+GitHub Actions 进行前端自动化部署  Hexo 自动部署
+mvp 服务
+怎么在服务中搭建小型ai
+无头浏览器自动化测试
+threejs                                                          基础添加
+cesium 的系统学习
+Mcp服务  智能体
+
+===============================
+
+写一个讲述的地图仿真系统，本地化的就行
+
+gis行业的互联网产品化  数据处理，数据免费下载，gltf免费下载，
+webgis上可以适当是现实,编辑放楼的效果
+ 
+
+收费预览网站
+https://www.offertd.com/
+麦菲吉文化
+
+历年各地区真题试卷
+小程序   参考 考研刷题小博士
+如果阅读token还多可以报所有的试卷给AI生成题库
+
+
+https://zhuanlan.zhihu.com/p/1892710283820118948
+小红书 商城虚拟资料
+
+AI做视频
+拥抱AI，使用AI做更多的东西
+
+微信支付问题（好像个人的不能开通）
+公考资料库（这里做刷题小程序）
+刷题和历年真题小程序
+
+小工具
+1.通过文字生成图片
+2.通过文字生成二维码
+3.复制为超链接
+ 
+ QoderWork
+https://code.coze.cn/p/7623316184737513514/deploy?tab=overview
+https://copilot.tencent.com/work/
+https://dify.ai/zh
+skills
+
+https://github.com/abhigyanpatwari/GitNexus
+https://cloud.dify.ai/apps
+code buddy
+
